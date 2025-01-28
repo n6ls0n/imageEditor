@@ -1,4 +1,4 @@
-source "$HOME/mulVid/libs/emscripten/emsdk_env.sh" && \
+source "$HOME/imageEditor/libs/emscripten/emsdk_env.sh" && \
 cmake -S ./libs/SDL -B sdl_build \
     -DSDL_STATIC=ON \
     -DSDL_SHARED=ON \
