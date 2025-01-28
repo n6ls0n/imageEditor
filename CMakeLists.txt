@@ -5,12 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set paths
-set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/../libs/imgui)
-set(SDL3_DIR ${CMAKE_SOURCE_DIR}/../libs/SDL)
-set(SDL3_LIB_DIR ${CMAKE_SOURCE_DIR}/../sdl_build)
-set(SDL3_WEB_LIB_DIR ${CMAKE_SOURCE_DIR}/../sdl_build_web)
-set(PFD_DIR ${CMAKE_SOURCE_DIR}/../libs/pfd)
-set(STB_DIR ${CMAKE_SOURCE_DIR}/../libs/stb)
+set(IMGUI_DIR ${CMAKE_SOURCE_DIR}/libs/imgui)
+set(SDL3_DIR ${CMAKE_SOURCE_DIR}/libs/SDL)
+set(SDL3_LIB_DIR ${CMAKE_SOURCE_DIR}/sdl_build)
+set(SDL3_WEB_LIB_DIR ${CMAKE_SOURCE_DIR}/sdl_build_web)
+set(PFD_DIR ${CMAKE_SOURCE_DIR}/libs/pfd)
+set(STB_DIR ${CMAKE_SOURCE_DIR}/libs/stb)
 
 # Add source files
 set(SOURCES
