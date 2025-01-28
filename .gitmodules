@@ -7,3 +7,6 @@
 [submodule "libs/emscripten"]
 	path = libs/emscripten
 	url = https://github.com/emscripten-core/emsdk
+[submodule "libs/SDL"]
+	path = libs/SDL
+	url = https://github.com/libsdl-org/SDL.git
