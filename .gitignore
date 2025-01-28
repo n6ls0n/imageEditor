@@ -1,0 +1,6 @@
+**/build/
+**/build_web/
+**/sdl_build/
+**/sdl_build_web/
+Jenkinsfile
+
