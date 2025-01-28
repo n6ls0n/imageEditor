@@ -58,7 +58,7 @@ if(EMSCRIPTEN)
         "SHELL:-s ASSERTIONS=1"
     )
 
-    target_link_libraries(${PROJECT_NAME}_web PRIVATE ${SDL3_WEB_LIB_DIR}/build-artifacts/web/libSDL3.a)
+    target_link_libraries(${PROJECT_NAME}_web PRIVATE ${SDL3_WEB_LIB_DIR}/build-artifacts/libSDL3.a)
 else()
     add_executable(${PROJECT_NAME} ${SOURCES})
     target_include_directories(${PROJECT_NAME} PRIVATE ${COMMON_INCLUDE_DIRS} ${SDL3_DIR}/include ${PFD_DIR})
