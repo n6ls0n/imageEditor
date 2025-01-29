@@ -11,7 +11,6 @@ pipeline {
         DOCKER_IMAGE = 'nelsoncnwauche/images:imageeditor-latest'
         GIT_CREDS = 'dcf54507-1c53-47e5-9869-a1015d823d32'
         DOCKER_CREDS = '4744871b-b8cc-46c9-9112-26272b68eeba'
-        SSH_CREDS = 'ssh-credentials'
     }
 
     stages {
@@ -54,25 +53,25 @@ pipeline {
         }
 
         stage('Add Host Key') {
-        steps {
-                script {
-                    def serverAddress = env.DEPLOY_SERVER
-                    if (serverAddress.contains('@')) {
-                        serverAddress = serverAddress.split('@')[1]
-                    }
-                    sh """
-                        mkdir -p ~/.ssh
-                        ssh-keyscan -H ${serverAddress} >> ~/.ssh/known_hosts
-                    """
-                }
+    steps {
+        script {
+            def serverAddress = env.DEPLOY_SERVER
+            if (serverAddress.contains('@')) {
+                serverAddress = serverAddress.split('@')[1]
             }
+            sh """
+                mkdir -p ~/.ssh
+                ssh-keyscan -H ${serverAddress} >> ~/.ssh/known_hosts
+            """
         }
+    }
+}
 
         stage('Prepare Deployment Directory') {
             steps {
                 script {
                     try {
-                        sshagent(credentials: [env.SSH_CREDS]) {
+                        sshagent(credentials: ['ssh-credentials']) {
                             sh """
                                 ssh ${env.DEPLOY_SERVER} '
                                     mkdir -p ${env.DEPLOY_DIR}
@@ -99,7 +98,7 @@ pipeline {
                 script {
                     try {
                         docker.withRegistry('', env.DOCKER_CREDS) {
-                            sshagent(credentials: [env.SSH_CREDS]) {
+                            sshagent(credentials: ['ssh-credentials']) {
                                 sh """
                                     ssh ${env.DEPLOY_SERVER} '
                                         cd ${env.DEPLOY_DIR}
@@ -127,7 +126,7 @@ pipeline {
     post {
         always {
             script {
-                sshagent(credentials: [env.SSH_CREDS]) {
+                sshagent(credentials: ['ssh-credentials']) {
                     sh """
                         ssh ${env.DEPLOY_SERVER} '
                             rm -rf ${env.DEPLOY_DIR}@tmp || true
