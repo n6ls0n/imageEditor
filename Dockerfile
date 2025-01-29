@@ -8,7 +8,7 @@ WORKDIR /app
 COPY custom_server.py /app
 
 # Copy the folder containing HTML and WASM files
-COPY ./build_web/web /app
+COPY ./build_web_files/ /app
 
 # Set the port as an environment variable
 ENV PORT=7060
