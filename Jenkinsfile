@@ -97,19 +97,21 @@ pipeline {
             steps {
                 script {
                     try {
-                        docker.withRegistry('', env.DOCKER_CREDS) {
+                        withCredentials([usernamePassword(credentialsId: '4744871b-b8cc-46c9-9112-26272b68eeba', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
                             sshagent(credentials: ['ssh-credentials']) {
                                 sh """
-                                    ssh ${env.DEPLOY_SERVER} '
-                                        cd ${env.DEPLOY_DIR}
+                                    ssh ${DEPLOY_SERVER} '
+                                        cd ${DEPLOY_DIR}
+                                        echo ${PASSWORD} | docker login -u ${USERNAME} --password-stdin
                                         docker stop imageeditor || true
                                         docker rm imageeditor || true
-                                        docker pull ${env.DOCKER_IMAGE}
+                                        docker pull ${DOCKER_IMAGE}
                                         docker run -d \
                                             --name imageeditor \
                                             --restart unless-stopped \
                                             -p 7060:7060 \
-                                            ${env.DOCKER_IMAGE}
+                                            ${DOCKER_IMAGE}
+                                        docker logout
                                     '
                                 """
                             }
