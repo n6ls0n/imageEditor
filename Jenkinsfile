@@ -54,11 +54,15 @@ pipeline {
         }
 
         stage('Add Host Key') {
-            steps {
+        steps {
                 script {
+                    def serverAddress = env.DEPLOY_SERVER
+                    if (serverAddress.contains('@')) {
+                        serverAddress = serverAddress.split('@')[1]
+                    }
                     sh """
                         mkdir -p ~/.ssh
-                        ssh-keyscan -H ${env.DEPLOY_SERVER.split('@')[1]} >> ~/.ssh/known_hosts
+                        ssh-keyscan -H ${serverAddress} >> ~/.ssh/known_hosts
                     """
                 }
             }
