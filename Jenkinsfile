@@ -31,7 +31,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 script {
-                    sh "docker build -f Dockerfile.prod -t ${env.DOCKER_IMAGE} ."
+                    sh "docker build -f Dockerfile -t ${env.DOCKER_IMAGE} ."
                 }
             }
         }
